@@ -1,12 +1,16 @@
-import { Body, ClassSerializerInterceptor, Controller, Post, UseInterceptors, ValidationPipe } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors, ValidationPipe } from '@nestjs/common';
 import { UserService } from 'src/modules/database/user/service/user.service';
 import { CreateUserDto } from 'src/modules/database/user/user.dto';
+import { AuthGuard } from '../auth.guard';
+import { LoginCredentialsDto } from '../LoginCredentialsDto';
+import { AuthService } from '../service/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly userService: UserService 
+    private readonly userService: UserService,
+    private readonly authService: AuthService
   ) {}
 
   @Post("/user")
@@ -18,9 +22,15 @@ export class AuthController {
 
   @Post("/login")
   login(
-    @Body() loginCredentials: { email: string; password: string }
+    @Body(new ValidationPipe()) loginCredentials: LoginCredentialsDto
   ) {
-    
+    return this.authService.signIn(loginCredentials)
+  }
+
+  @UseGuards(AuthGuard)
+  @Get("/teste")
+  teste() {
+    return "ok"
   }
 
 }

@@ -42,4 +42,14 @@ export class UserService {
       return user;
     }
   }
+
+  public async getOneByEmail(email: string) {
+    const user = await this.userRepo.findOneByEmail(email);
+
+    if (!user) {
+      throw new NotFoundException("user not found");
+    } else {
+      return user;
+    }
+  }
 }
