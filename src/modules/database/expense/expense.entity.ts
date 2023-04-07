@@ -9,8 +9,8 @@ export class ExpenseEntity {
   @Column({ name: "description" })
   description: string;
 
-  @CreateDateColumn({ name: "created_at" })
-  createdAt: Date
+  @Column({ name: "expense_date" })
+  expenseDate: Date
 
   // in cents to avoid float
   @Column({ name: "expense_value" })

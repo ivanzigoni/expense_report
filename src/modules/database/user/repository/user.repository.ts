@@ -11,6 +11,10 @@ export class UserRepository {
     private readonly userRepo: Repository<UserEntity>
   ) {}
 
+  public async findAll() {
+    return this.userRepo.find();
+  }
+
   public async findOneByEmail(email: string) {
     return this.userRepo.findOne({ where: { email }})
   }

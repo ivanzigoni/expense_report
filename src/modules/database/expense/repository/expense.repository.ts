@@ -1,37 +1,33 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto, UpdateUserDto } from '../user.dto';
-import { UserEntity } from '../user.entity';
+import { CreateExpenseDto } from '../expense.dto';
+import { ExpenseEntity } from '../expense.entity';
 
 @Injectable()
-export class UserRepository {
+export class ExpenseRepository {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepo: Repository<UserEntity>
+    @InjectRepository(ExpenseEntity)
+    private readonly expenseRepo: Repository<ExpenseEntity>
   ) {}
 
-  public async findOneByEmail(email: string) {
-    return this.userRepo.findOne({ where: { email }})
+  public async findAll() {
+    return this.expenseRepo.find();
   }
 
   public async findOneById(id: number) {
-    try {
-      return this.userRepo.findOneOrFail({ where: { id }})
-    } catch (err) {
-      return false;
-    }
+    return this.expenseRepo.findOne({ where: { id }})
   }
 
-  public async create(userDto: CreateUserDto) {
-      return this.userRepo.save(
-        this.userRepo.create({ ...userDto })
+  public async create(expenseDto: CreateExpenseDto) {
+      return this.expenseRepo.save(
+        this.expenseRepo.create({ ...expenseDto })
       )
   }
 
-  public async update(user: UserEntity, userDto: UpdateUserDto ) {
-    return this.userRepo.save(
-      this.userRepo.merge(user, { ...userDto })
+  public async update(expense: ExpenseEntity, expenseDto: CreateExpenseDto ) {
+    return this.expenseRepo.save(
+      this.expenseRepo.merge(expense, { ...expenseDto })
     )
   }
 }

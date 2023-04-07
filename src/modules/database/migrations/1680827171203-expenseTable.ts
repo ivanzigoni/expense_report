@@ -7,7 +7,7 @@ export class ExpenseTable1680827171203 implements MigrationInterface {
             CREATE TABLE expenses (
                 id SERIAL PRIMARY KEY,
                 description VARCHAR(200) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                expense_date TIMESTAMP NOT NULL,
                 user_id INT NOT NULL,
                 expense_value INT NOT NULL,
 
