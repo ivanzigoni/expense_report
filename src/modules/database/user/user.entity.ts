@@ -1,4 +1,12 @@
 import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ConfigService } from '@nestjs/config';
+import { config } from 'dotenv';
+import * as bcrypt from 'bcrypt';
+ 
+config();
+ 
+const configService = new ConfigService();
+
 
 @Entity("users")
 export class UserEntity {
@@ -22,6 +30,7 @@ export class UserEntity {
 
   @BeforeInsert()
   hashPassword() {
-    
+    const salt = bcrypt.genSaltSync(+configService.get("SALT"))
+    this.password = bcrypt.hashSync(this.password, salt);
   }
 }
