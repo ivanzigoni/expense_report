@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors, ValidationPipe } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors, ValidationPipe, Request } from '@nestjs/common';
 import { UserService } from 'src/modules/database/user/service/user.service';
 import { CreateUserDto } from 'src/modules/database/user/user.dto';
 import { AuthGuard } from '../auth.guard';
@@ -29,7 +29,10 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get("/teste")
-  teste() {
+  teste(
+    @Request() req
+  ) {
+    console.log(req.user)
     return "ok"
   }
 

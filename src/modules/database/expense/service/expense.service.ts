@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserEntity } from '../../user/user.entity';
 import { CreateExpenseDto, UpdateExpenseDto } from '../expense.dto';
 import { ExpenseRepository } from '../repository/expense.repository';
 
@@ -10,8 +11,8 @@ export class ExpenseService {
     private readonly expenseRepo: ExpenseRepository
   ) {}
 
-  public async create(expenseDto: CreateExpenseDto) {
-    return this.expenseRepo.create(expenseDto);
+  public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
+    return this.expenseRepo.create(expenseDto, user);
   }
 
   public async update(id: number, expenseDto: UpdateExpenseDto) {

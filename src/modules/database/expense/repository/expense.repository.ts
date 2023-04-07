@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserEntity } from '../../user/user.entity';
 import { CreateExpenseDto } from '../expense.dto';
 import { ExpenseEntity } from '../expense.entity';
 
@@ -19,9 +20,9 @@ export class ExpenseRepository {
     return this.expenseRepo.findOne({ where: { id }})
   }
 
-  public async create(expenseDto: CreateExpenseDto) {
+  public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
       return this.expenseRepo.save(
-        this.expenseRepo.create({ ...expenseDto })
+        this.expenseRepo.create({ ...expenseDto, user })
       )
   }
 
