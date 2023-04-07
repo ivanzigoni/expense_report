@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { ExpenseModule } from './expense/expense.module';
 
 @Module({
   imports: [TypeOrmModule.forRootAsync({
@@ -18,6 +16,6 @@ import { ExpenseModule } from './expense/expense.module';
       logging: true
     }),
     inject: [ConfigService],
-  }), UserModule, ExpenseModule]
+  })]
 })
 export class DatabaseModule {}
