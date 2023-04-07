@@ -1,8 +1,9 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { classToPlain, Exclude } from "class-transformer" 
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import * as bcrypt from 'bcrypt';
+import { ExpenseEntity } from "../expense/expense.entity";
  
 config();
  
@@ -26,6 +27,9 @@ export class UserEntity {
   @Exclude()
   @Column({ name: "password" })
   password: string;
+
+  @OneToMany(() => ExpenseEntity, (expense) => expense.user)
+  expenses: ExpenseEntity[]
 
   @BeforeInsert()
   hashPassword() {

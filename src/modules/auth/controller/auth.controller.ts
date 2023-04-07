@@ -13,7 +13,7 @@ export class AuthController {
   createUser(
     @Body(new ValidationPipe()) userDto: CreateUserDto
   ) {
-    return this.userService.create(userDto)
+    return this.userService.create(userDto);
   }
 
 }
