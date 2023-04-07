@@ -11,25 +11,25 @@ export class UserRepository {
     private readonly userRepo: Repository<UserEntity>
   ) {}
 
+  public async findOneByEmail(email: string) {
+    return this.userRepo.findOne({ where: { email }})
+  }
+
+  public async findOneById(id: number) {
+    try {
+      return this.userRepo.findOneOrFail({ where: { id }})
+    } catch (err) {
+      return false;
+    }
+  }
+
   public async create(userDto: CreateUserDto) {
-      const user = await this.userRepo.findOne({ where: { email: userDto.email } });
-
-      if (user) {
-        throw new ForbiddenException("email already in use");
-      }
-
       return this.userRepo.save(
         this.userRepo.create({ ...userDto })
       )
   }
 
-  public async update(id: number, userDto: UpdateUserDto ) {
-    const user = await this.userRepo.findOne({ where: { id } });
-
-    if (!user) {
-      throw new ForbiddenException("user does not exist");
-    }
-
+  public async update(user: UserEntity, userDto: UpdateUserDto ) {
     return this.userRepo.save(
       this.userRepo.merge(user, { ...userDto })
     )

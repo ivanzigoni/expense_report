@@ -1,4 +1,5 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { classToPlain, Exclude } from "class-transformer" 
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import * as bcrypt from 'bcrypt';
@@ -17,16 +18,14 @@ export class UserEntity {
   firstName: string;
 
   @Column({ name: "last_name" })
-  last_name: string;
+  lastName: string;
 
-  @Column({ name: "email" })
+  @Column({ name: "email", unique: true })
   email: string;
 
+  @Exclude()
   @Column({ name: "password" })
   password: string;
-
-  @CreateDateColumn({ name: "created_at" })
-  createdAt: Date;
 
   @BeforeInsert()
   hashPassword() {
