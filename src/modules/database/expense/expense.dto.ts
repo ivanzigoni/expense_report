@@ -1,17 +1,22 @@
-import { IsString, IsDateString, IsNumber } from "class-validator"
+import { Transform } from "class-transformer";
+import { IsString, IsNumber, MaxLength, IsPositive, IsNotEmpty, MaxDate, IsDate } from "class-validator"
 
 export class CreateExpenseDto {
 
+  @IsNotEmpty()
   @IsString()
+  @MaxLength(191)
   description: string;
 
-  @IsDateString()
+  @IsNotEmpty()
+  @IsDate()
+  @Transform(({ value }) => new Date(value))
+  @MaxDate(new Date())
   expenseDate: Date;
 
+  @IsNotEmpty()
   @IsNumber()
-  userId: number;
-
-  @IsNumber()
+  @IsPositive()
   expenseValue: number;
 
 }

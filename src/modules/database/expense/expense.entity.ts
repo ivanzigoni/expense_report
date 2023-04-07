@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { UserEntity } from "../user/user.entity";
 
-@Entity()
+@Entity("expenses")
 export class ExpenseEntity {
   @PrimaryGeneratedColumn({ name: "id" })
   id: number
@@ -16,6 +16,10 @@ export class ExpenseEntity {
   @Column({ name: "expense_value" })
   expenseValue: number;
 
+  @Column({ name: "user_id" })
+  userId: number;
+
   @ManyToOne(() => UserEntity, (user) => user.expenses)
+  @JoinColumn({ name: "user_id", foreignKeyConstraintName: "expenses_user_id_fkey", referencedColumnName: "id" })
   user: UserEntity
 }

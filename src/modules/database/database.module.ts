@@ -15,6 +15,7 @@ import { ExpenseModule } from './expense/expense.module';
       database: configService.get('DB_NAME'),
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/migrations/*.js'],
+      logging: true
     }),
     inject: [ConfigService],
   }), UserModule, ExpenseModule]
