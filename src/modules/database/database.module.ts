@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [TypeOrmModule.forRootAsync({
@@ -15,6 +16,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       migrations: [__dirname + '/migrations/*.js'],
     }),
     inject: [ConfigService],
-  })]
+  }), UserModule]
 })
 export class DatabaseModule {}
