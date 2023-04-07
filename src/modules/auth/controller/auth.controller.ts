@@ -13,7 +13,7 @@ export class AuthController {
     private readonly authService: AuthService
   ) {}
 
-  @Post("/user")
+  @Post("/signup")
   createUser(
     @Body(new ValidationPipe()) userDto: CreateUserDto
   ) {

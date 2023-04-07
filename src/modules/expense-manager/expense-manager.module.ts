@@ -6,7 +6,8 @@ import { ExpenseModule } from '../database/expense/expense.module';
 import { UserModule } from '../database/user/user.module';
 
 @Module({
-  providers: [ExpenseManagerService, AuthModule, ExpenseModule, UserModule],
+  imports: [AuthModule, ExpenseModule, UserModule],
+  providers: [ExpenseManagerService],
   controllers: [ExpenseManagerController]
 })
 export class ExpenseManager {}

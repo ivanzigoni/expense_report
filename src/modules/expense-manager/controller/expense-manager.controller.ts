@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
 import { CreateExpenseDto } from 'src/modules/database/expense/expense.dto';
 import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
@@ -14,10 +14,10 @@ export class ExpenseManagerController {
     private readonly expenseService: ExpenseService
   ) {}
 
-  @Post()
+  @Post("create")
   async registerExpense(
     @Request() req,
-    @Body() expenseDto: CreateExpenseDto
+    @Body(new ValidationPipe()) expenseDto: CreateExpenseDto
   ) {
     const user = await this.userService.getOneById(req.user.sub);
 
