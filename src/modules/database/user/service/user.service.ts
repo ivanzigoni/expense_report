@@ -20,7 +20,7 @@ export class UserService {
   }
 
   public async update(id: number, userDto: UpdateUserDto) {
-    const user = await this.userRepo.findOneById(id);
+    const user = await this.userRepo.findOneById(id, []);
 
     if (!user) {
       throw new ForbiddenException("user does not exist");
@@ -33,8 +33,8 @@ export class UserService {
     return this.userRepo.findAll();
   }
 
-  public async getOneById(id: number) {
-    const user = await this.userRepo.findOneById(id);
+  public async getOneById(id: number, relations: string[]) {
+    const user = await this.userRepo.findOneById(id, relations);
 
     if (!user) {
       throw new NotFoundException("user not found");

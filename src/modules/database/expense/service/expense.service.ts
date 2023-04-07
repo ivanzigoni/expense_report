@@ -29,8 +29,8 @@ export class ExpenseService {
     return this.expenseRepo.findAll();
   }
 
-  public async getOneById(id: number) {
-    const expense = await this.expenseRepo.findOneById(id);
+  public async getOneById(id: number, relations: string[] = []) {
+    const expense = await this.expenseRepo.findOneById(id, relations);
 
     if (!expense) {
       throw new NotFoundException("expense not found")
@@ -38,4 +38,9 @@ export class ExpenseService {
       return expense;
     }
   }
+
+  public async delete(id: number) {
+    return this.expenseRepo.delete(id);
+  }
+
 }

@@ -16,8 +16,11 @@ export class ExpenseRepository {
     return this.expenseRepo.find();
   }
 
-  public async findOneById(id: number) {
-    return this.expenseRepo.findOne({ where: { id }})
+  public async findOneById(id: number, relations: string[] = []) {
+    console.log(relations, "relations")
+    const teste = await this.expenseRepo.findOne({ where: { id }, relations })
+    console.log(teste);
+    return teste
   }
 
   public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
@@ -34,5 +37,9 @@ export class ExpenseRepository {
     return this.expenseRepo.save(
       this.expenseRepo.merge(expense, { ...expenseDto })
     )
+  }
+
+  public async delete(id: number) {
+    return this.expenseRepo.delete(id)
   }
 }

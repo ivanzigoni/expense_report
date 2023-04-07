@@ -19,9 +19,9 @@ export class UserRepository {
     return this.userRepo.findOne({ where: { email }})
   }
 
-  public async findOneById(id: number) {
+  public async findOneById(id: number, relations: string[]) {
     try {
-      return this.userRepo.findOneOrFail({ where: { id }})
+      return this.userRepo.findOneOrFail({ where: { id }, relations })
     } catch (err) {
       return false;
     }
