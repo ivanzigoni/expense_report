@@ -24,12 +24,9 @@ export class ExpenseRepository {
   }
 
   public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
-    console.log(expenseDto)
-
     const expense = this.expenseRepo.create(expenseDto);
     expense.user = user;
 
-    console.log(expense);
     return this.expenseRepo.save(expense);
   }
 
