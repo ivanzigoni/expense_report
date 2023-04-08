@@ -1,8 +1,8 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { ExpenseEntity } from 'src/modules/database/expense/expense.entity';
 import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
 import { capitalizeFirstLetter } from 'src/modules/mailer/utils/string';
-import { SendEmailPayload } from '../interfaces/register-expense.dto';
 
 @Injectable()
 export class ExpenseManagerService {
@@ -11,7 +11,7 @@ export class ExpenseManagerService {
     private readonly mailerService: MailerService
   ) {}
 
-  public async sendEmail(payload: SendEmailPayload) {
+  public async sendEmail(payload: { expense: ExpenseEntity }) {
     // TODO: fila com redis
 
     const {

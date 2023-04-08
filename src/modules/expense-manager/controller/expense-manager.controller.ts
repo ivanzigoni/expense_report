@@ -1,10 +1,12 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, ForbiddenException, Get, Param, Post, Put, Req, Request, UseGuards, UseInterceptors, ValidationPipe } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
 import { CreateExpenseDto, UpdateExpenseDto } from 'src/modules/database/expense/expense.dto';
 import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
 import { UserService } from 'src/modules/database/user/service/user.service';
 import { ExpenseManagerService } from '../service/expense-manager.service';
 
+@ApiTags("Expenses Manager")
 @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard)
 @Controller('expense-manager')

@@ -1,10 +1,12 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors, ValidationPipe, Request } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { UserService } from 'src/modules/database/user/service/user.service';
 import { CreateUserDto } from 'src/modules/database/user/user.dto';
 import { AuthGuard } from '../auth.guard';
-import { LoginCredentialsDto } from '../LoginCredentialsDto';
+import { LoginCredentialsDto } from '../loginCredentialsDto';
 import { AuthService } from '../service/auth.service';
 
+@ApiTags("Auth")
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
@@ -27,12 +29,8 @@ export class AuthController {
     return this.authService.signIn(loginCredentials)
   }
 
-  @UseGuards(AuthGuard)
-  @Get("/teste")
-  teste(
-    @Request() req
-  ) {
-    console.log(req.user)
+  @Get("/healthheck")
+  teste() {
     return "ok"
   }
 
