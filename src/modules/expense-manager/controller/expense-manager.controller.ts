@@ -59,12 +59,12 @@ export class ExpenseManagerController {
   async updateExpense(
     @Param() params,
     @Req() req,
-    @Body() expenseDto: UpdateExpenseDto
+    @Body(new ValidationPipe()) expenseDto: UpdateExpenseDto
   ) {
     const userId = req.user.sub;
     const expenseId = params.id;
 
-    const expense = await this.expenseService.getOneById(expenseId);
+    const expense = await this.expenseService.getOneById(expenseId, ["user"]);
 
     if (expense.user.id !== userId) {
       throw new ForbiddenException()
