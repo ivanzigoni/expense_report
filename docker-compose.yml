@@ -26,7 +26,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "${DB_PORT}:5432" # hostport to containerport
+      - "5432:5432" # hostport to containerport
     networks:
       - app
 
