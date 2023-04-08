@@ -12,13 +12,8 @@ services:
     ports:
       - 3000:3000
     command: npm run start:dev
-    environment:
-      - DB_TYPE=DB_TYPE
-      - DB_HOST=DB_HOST
-      - DB_PORT=DB_PORT
-      - DB_USERNAME=DB_USERNAME
-      - DB_PASSWORD=DB_PASSWORD
-      - DB_NAME=DB_NAME
+    networks:
+      - app
 
 
   postgres:
@@ -32,3 +27,9 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "${DB_PORT}:5432" # hostport to containerport
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
