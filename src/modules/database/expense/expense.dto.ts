@@ -1,9 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Transform } from "class-transformer";
-import { IsString, IsNumber, MaxLength, IsPositive, IsNotEmpty, MaxDate, IsDate } from "class-validator"
+import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
+import {
+  IsString,
+  IsNumber,
+  MaxLength,
+  IsPositive,
+  IsNotEmpty,
+  MaxDate,
+  IsDate,
+} from 'class-validator';
 
 export class CreateExpenseDto {
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -22,7 +29,6 @@ export class CreateExpenseDto {
   @IsNumber()
   @IsPositive()
   expenseValue: number;
-
 }
 
 export class UpdateExpenseDto extends CreateExpenseDto {}

@@ -7,10 +7,15 @@ import { ExpenseModule } from '../database/expense/expense.module';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [AuthModule, ExpenseModule, UserModule, BullModule.registerQueue({
-    name: "mailqueue"
-  })],
+  imports: [
+    AuthModule,
+    ExpenseModule,
+    UserModule,
+    BullModule.registerQueue({
+      name: 'mailqueue',
+    }),
+  ],
   providers: [ExpenseManagerService],
-  controllers: [ExpenseManagerController]
+  controllers: [ExpenseManagerController],
 })
 export class ExpenseManager {}

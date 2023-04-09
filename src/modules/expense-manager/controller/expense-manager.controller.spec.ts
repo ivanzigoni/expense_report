@@ -9,7 +9,7 @@ import { ExpenseManagerController } from './expense-manager.controller';
 describe('ExpenseManagerController', () => {
   let controller: ExpenseManagerController;
 
-  const toDoFactories = () => ({})
+  const toDoFactories = () => ({});
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -17,26 +17,25 @@ describe('ExpenseManagerController', () => {
       providers: [
         {
           provide: ExpenseManagerService,
-          useFactory: toDoFactories
+          useFactory: toDoFactories,
         },
         {
           provide: UserService,
-          useFactory: toDoFactories
+          useFactory: toDoFactories,
         },
         {
           provide: ExpenseService,
-          useFactory: toDoFactories
+          useFactory: toDoFactories,
         },
         {
           provide: JwtService,
-          useFactory: toDoFactories
+          useFactory: toDoFactories,
         },
         {
           provide: ConfigService,
-          useFactory: toDoFactories
-        }
-        
-      ]
+          useFactory: toDoFactories,
+        },
+      ],
     }).compile();
 
     controller = module.get<ExpenseManagerController>(ExpenseManagerController);

@@ -6,8 +6,8 @@ import { InjectQueue } from '@nestjs/bull';
 @Injectable()
 export class ExpenseManagerService {
   constructor(
-    @InjectQueue("mailqueue")
-    private readonly mailQueue: Queue
+    @InjectQueue('mailqueue')
+    private readonly mailQueue: Queue,
   ) {}
 
   public async sendConfirmationMail(payload: { expense: ExpenseEntity }) {
@@ -15,6 +15,6 @@ export class ExpenseManagerService {
 
     await this.mailQueue.add(expenseId);
 
-    return { message: "ok" }
+    return { message: 'ok' };
   }
 }

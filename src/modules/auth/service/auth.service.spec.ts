@@ -9,26 +9,28 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
 
-  const userServiceFactory = () => ({})
-  const userRepositoryFactory = () => ({})
-  const userDbRepoFactory = () => ({})
+  const userServiceFactory = () => ({});
+  const userRepositoryFactory = () => ({});
+  const userDbRepoFactory = () => ({});
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService, JwtService,
-    {
-        provide: UserService,
-        useFactory: userServiceFactory
-    },
-    {
-      provide: UserRepository,
-      useFactory: userRepositoryFactory
-    },
-    {
-      provide: getRepositoryToken(UserEntity),
-      useFactory: userDbRepoFactory
-    }
-],
+      providers: [
+        AuthService,
+        JwtService,
+        {
+          provide: UserService,
+          useFactory: userServiceFactory,
+        },
+        {
+          provide: UserRepository,
+          useFactory: userRepositoryFactory,
+        },
+        {
+          provide: getRepositoryToken(UserEntity),
+          useFactory: userDbRepoFactory,
+        },
+      ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);

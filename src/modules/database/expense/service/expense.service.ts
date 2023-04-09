@@ -5,9 +5,7 @@ import { ExpenseRepository } from '../repository/expense.repository';
 
 @Injectable()
 export class ExpenseService {
-  constructor(
-    private readonly expenseRepo: ExpenseRepository
-  ) {}
+  constructor(private readonly expenseRepo: ExpenseRepository) {}
 
   public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
     return this.expenseRepo.create(expenseDto, user);
@@ -17,7 +15,7 @@ export class ExpenseService {
     const expense = await this.expenseRepo.findOneById(id);
 
     if (!expense) {
-      throw new NotFoundException("expense not found");
+      throw new NotFoundException('expense not found');
     } else {
       return this.expenseRepo.update(expense, expenseDto);
     }
@@ -31,7 +29,7 @@ export class ExpenseService {
     const expense = await this.expenseRepo.findOneById(id, relations);
 
     if (!expense) {
-      throw new NotFoundException("expense not found")
+      throw new NotFoundException('expense not found');
     } else {
       return expense;
     }
@@ -40,5 +38,4 @@ export class ExpenseService {
   public async delete(id: number) {
     return this.expenseRepo.delete(id);
   }
-
 }
