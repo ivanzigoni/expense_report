@@ -3,53 +3,21 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ExpenseEntity } from 'src/modules/database/expense/expense.entity';
 import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
 import { capitalizeFirstLetter } from 'src/modules/mailer/utils/string';
+import { Queue } from 'bull';
+import { InjectQueue } from '@nestjs/bull';
 
 @Injectable()
 export class ExpenseManagerService {
   constructor(
-    private readonly expenseService: ExpenseService,
-    private readonly mailerService: MailerService
+    @InjectQueue("mailqueue")
+    private readonly mailQueue: Queue
   ) {}
 
   public async sendEmail(payload: { expense: ExpenseEntity }) {
-    // TODO: fila com redis
+    const expenseId = payload.expense.id;
 
-    const {
-      expense: {
-        description,
-        expenseDate,
-        expenseValue,
-        user: {
-          email,
-          firstName,
-          lastName,
-        }
-      }
-    } = payload;
+    await this.mailQueue.add(expenseId);
 
-    const fullName = `${capitalizeFirstLetter(firstName)} ${capitalizeFirstLetter(lastName)}`;
-    const date = new Date(expenseDate).toLocaleString("pt-br");
-    const value = `R$${expenseValue * 100}`; // reais
-
-    try {
-
-      await this.mailerService.sendMail({
-        to: email,
-        subject: `Despesa de ${fullName} cadastrada.`,
-        html: `
-          Sua despesa "${description}" efetuada no dia ${date} de valor ${value} reais foi cadastrada com sucesso!
-        `
-      });
-
-      return { message: "ok" }
-    
-    } catch (err) {
-
-      console.log(err)
-      console.log("err mail")
-      throw new InternalServerErrorException("failed to send report mail")
-
-    }
-
+    return { message: "ok" }
   }
 }

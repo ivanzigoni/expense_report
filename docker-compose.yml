@@ -30,6 +30,9 @@ services:
     networks:
       - app
 
+  redis:
+    image: redis
+
 networks:
   app:
     driver: bridge

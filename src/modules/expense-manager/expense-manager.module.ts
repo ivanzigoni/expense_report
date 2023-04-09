@@ -4,9 +4,13 @@ import { ExpenseManagerController } from './controller/expense-manager.controlle
 import { AuthModule } from '../auth/auth.module';
 import { ExpenseModule } from '../database/expense/expense.module';
 import { UserModule } from '../database/user/user.module';
+import { QueueManagerModule } from '../queue-manager/queue-manager.module';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
-  imports: [AuthModule, ExpenseModule, UserModule],
+  imports: [AuthModule, ExpenseModule, UserModule,     BullModule.registerQueue({
+    name: "mailqueue"
+  })],
   providers: [ExpenseManagerService],
   controllers: [ExpenseManagerController]
 })
