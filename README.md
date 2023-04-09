@@ -12,6 +12,9 @@ Diagrama ER.
 ![db diagram](./assets/diagram.png)
 
 ---
+
+Coleção de requisições para o Insomnia (JSON) em assets/routes_insomnia.json
+
 Documentação da API através do Swagger disponível na rota /api (HTML).
 
 ![swagger document](./assets/swagger.png)
