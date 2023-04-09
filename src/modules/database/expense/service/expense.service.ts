@@ -1,6 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { UserEntity } from '../../user/user.entity';
 import { CreateExpenseDto, UpdateExpenseDto } from '../expense.dto';
 import { ExpenseRepository } from '../repository/expense.repository';
