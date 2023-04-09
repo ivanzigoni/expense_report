@@ -1,4 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Repository } from 'typeorm';
+import { ExpenseEntity } from '../expense.entity';
+import { ExpenseRepository } from '../repository/expense.repository';
 import { ExpenseService } from './expense.service';
 
 describe('ExpenseService', () => {
@@ -6,6 +9,7 @@ describe('ExpenseService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [],
       providers: [ExpenseService],
     }).compile();
 
