@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto, UpdateUserDto } from '../user.dto';
@@ -16,14 +16,20 @@ export class UserRepository {
   }
 
   public async findOneByEmail(email: string) {
-    return this.userRepo.findOne({ where: { email }})
+    const user = await this.userRepo.findOne({ where: { email }});
+
+    if (!user) {
+      throw new NotFoundException("user not found");
+    } else {
+      return user;
+    }
   }
 
-  public async findOneById(id: number, relations: string[]) {
+  public async findOneById(id: number, relations: string[] = []) {
     try {
       return this.userRepo.findOneOrFail({ where: { id }, relations })
     } catch (err) {
-      return false;
+      throw new NotFoundException("user not found");
     }
   }
 

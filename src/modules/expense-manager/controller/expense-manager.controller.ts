@@ -1,9 +1,9 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, ForbiddenException, Get, Param, Post, Put, Req, Request, UseGuards, UseInterceptors, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/modules/auth/auth.guard';
-import { CreateExpenseDto, UpdateExpenseDto } from 'src/modules/database/expense/expense.dto';
-import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
-import { UserService } from 'src/modules/database/user/service/user.service';
+import { AuthGuard } from '../../../modules/auth/auth.guard';
+import { CreateExpenseDto, UpdateExpenseDto } from '../../../modules/database/expense/expense.dto';
+import { ExpenseService } from '../../../modules/database/expense/service/expense.service';
+import { UserService } from '../../../modules/database/user/service/user.service';
 import { ExpenseManagerService } from '../service/expense-manager.service';
 
 @ApiTags("Expenses Manager")
@@ -28,7 +28,7 @@ export class ExpenseManagerController {
 
     const expense = await this.expenseService.create(expenseDto, user);
     
-    return this.expenseManagerService.sendEmail({ expense });
+    return this.expenseManagerService.sendConfirmationMail({ expense });
   }
 
   @Get("all")

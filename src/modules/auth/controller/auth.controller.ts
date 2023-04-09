@@ -1,7 +1,7 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors, ValidationPipe, Request } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UserService } from 'src/modules/database/user/service/user.service';
-import { CreateUserDto } from 'src/modules/database/user/user.dto';
+import { UserService } from '../../database/user/service/user.service'
+import { CreateUserDto } from '../../database/user/user.dto';
 import { AuthGuard } from '../auth.guard';
 import { LoginCredentialsDto } from '../loginCredentialsDto';
 import { AuthService } from '../service/auth.service';

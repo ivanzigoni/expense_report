@@ -1,10 +1,9 @@
-import { Test, TestingModule,  } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ExpenseEntity } from '../expense.entity';
 import { ExpenseRepository } from '../repository/expense.repository';
 import { ExpenseService } from './expense.service';
-import { expensesArr, user1, user2 } from "../repository/test-assets/mock";
+import { expensesArr, user1 } from "../repository/test-assets/mock";
 import { CreateExpenseDto, UpdateExpenseDto } from '../expense.dto';
 import { UserEntity } from '../../user/user.entity';
 import { NotFoundException } from '@nestjs/common';

@@ -1,8 +1,5 @@
-import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ExpenseEntity } from 'src/modules/database/expense/expense.entity';
-import { ExpenseService } from 'src/modules/database/expense/service/expense.service';
-import { capitalizeFirstLetter } from 'src/modules/mailer/utils/string';
 import { Queue } from 'bull';
 import { InjectQueue } from '@nestjs/bull';
 
@@ -13,7 +10,7 @@ export class ExpenseManagerService {
     private readonly mailQueue: Queue
   ) {}
 
-  public async sendEmail(payload: { expense: ExpenseEntity }) {
+  public async sendConfirmationMail(payload: { expense: ExpenseEntity }) {
     const expenseId = payload.expense.id;
 
     await this.mailQueue.add(expenseId);
