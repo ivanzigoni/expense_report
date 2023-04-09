@@ -7,19 +7,19 @@ import { ExpenseEntity } from '../expense.entity';
 import { ExpenseRepository } from './expense.repository';
 import { expensesArr, user1 } from './test-assets/mock';
 
-describe('Expense', () => {
+describe('Expense Repository', () => {
   type MockType<T> = {
     [P in keyof T]?: jest.Mock<{}>;
   };
 
   const repositoryMockFactory: () => MockType<Repository<ExpenseEntity>> = jest.fn(() => ({
-    findOne: jest.fn((id: number) => { return {} }),
-    find: jest.fn((id: number) => { return {} }),
-    create: jest.fn((id: number) => { return {} }),
-    update: jest.fn((id: number) => { return {} }),
-    save: jest.fn((id: number) => { return {} }),
-    merge: jest.fn((id: number) => { return {} }),
-    delete: jest.fn((id: number) => { return {} }),
+    findOne: jest.fn(() => { return {} }),
+    find: jest.fn(() => { return {} }),
+    create: jest.fn(() => { return {} }),
+    update: jest.fn(() => { return {} }),
+    save: jest.fn(() => { return {} }),
+    merge: jest.fn(() => { return {} }),
+    delete: jest.fn(() => { return {} }),
   }));
 
   let provider: ExpenseRepository;
