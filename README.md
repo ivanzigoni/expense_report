@@ -12,6 +12,7 @@ Diagrama ER.
 
 
 
+
 Documentação da API através do Swagger disponível na rota /api (HTML).
 
 ![swagger document](./assets/swagger.png)
