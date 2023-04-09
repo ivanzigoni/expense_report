@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import * as bcrypt from 'bcrypt';
 import { ExpenseEntity } from "../expense/expense.entity";
+import { ApiProperty } from "@nestjs/swagger";
  
 config();
  
@@ -12,15 +13,19 @@ const configService = new ConfigService();
 
 @Entity("users")
 export class UserEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn({ name: "id" })
   id: number;
 
+  @ApiProperty()
   @Column({ name: "first_name" })
   firstName: string;
 
+  @ApiProperty()
   @Column({ name: "last_name" })
   lastName: string;
 
+  @ApiProperty()
   @Column({ name: "email", unique: true })
   email: string;
 
@@ -28,6 +33,7 @@ export class UserEntity {
   @Column({ name: "password" })
   password: string;
 
+  @ApiProperty(({ type: () => Array<ExpenseEntity> }))
   @OneToMany(() => ExpenseEntity, (expense) => expense.user)
   expenses: ExpenseEntity[]
 
