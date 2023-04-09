@@ -12,15 +12,16 @@ import { MailQueueConsumer } from './mailQueue.consumer';
     BullModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         redis: {
-          host: configService.get("REDIS_HOST"),
-          port: +configService.get("REDIS_PORT"),
+          host: configService.get('REDIS_HOST'),
+          port: +configService.get('REDIS_PORT'),
         },
-      }), inject: [ConfigService]
+      }),
+      inject: [ConfigService],
     }),
     BullModule.registerQueue({
-      name: "mailqueue"
-    })
-  , ExpenseModule],
+      name: 'mailqueue',
+    }),
+    ExpenseModule,
+  ],
 })
 export class QueueManagerModule {}
-

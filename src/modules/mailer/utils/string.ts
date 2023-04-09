@@ -1,17 +1,15 @@
 function capitalizeFirstLetter(word: string) {
-  let output = "";
+  let output = '';
 
   for (let i = 0; i < word.length; i += 1) {
-    if (i===0) {
-      output += word[i].toUpperCase()
+    if (i === 0) {
+      output += word[i].toUpperCase();
     } else {
-      output += word[i]
+      output += word[i];
     }
   }
 
   return output;
 }
 
-export {
-  capitalizeFirstLetter
-}
+export { capitalizeFirstLetter };

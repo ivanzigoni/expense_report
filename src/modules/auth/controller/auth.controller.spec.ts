@@ -6,20 +6,22 @@ import { AuthController } from './auth.controller';
 describe('AuthController', () => {
   let controller: AuthController;
 
-  const userServiceFactory = () => ({})
-  const authServiceFactory = () => ({})
+  const userServiceFactory = () => ({});
+  const authServiceFactory = () => ({});
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [{
-        provide: UserService,
-        useFactory: userServiceFactory
-      },
-    {
-      provide: AuthService,
-      useFactory: authServiceFactory
-    }]
+      providers: [
+        {
+          provide: UserService,
+          useFactory: userServiceFactory,
+        },
+        {
+          provide: AuthService,
+          useFactory: authServiceFactory,
+        },
+      ],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);

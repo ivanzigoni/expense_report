@@ -9,7 +9,7 @@ import { ExpenseEntity } from '../expense.entity';
 export class ExpenseRepository {
   constructor(
     @InjectRepository(ExpenseEntity)
-    private readonly expenseRepo: Repository<ExpenseEntity>
+    private readonly expenseRepo: Repository<ExpenseEntity>,
   ) {}
 
   public async findAll() {
@@ -17,7 +17,7 @@ export class ExpenseRepository {
   }
 
   public async findOneById(id: number, relations: string[] = []) {
-    return this.expenseRepo.findOne({ where: { id }, relations })
+    return this.expenseRepo.findOne({ where: { id }, relations });
   }
 
   public async create(expenseDto: CreateExpenseDto, user: UserEntity) {
@@ -27,13 +27,13 @@ export class ExpenseRepository {
     return this.expenseRepo.save(expense);
   }
 
-  public async update(expense: ExpenseEntity, expenseDto: CreateExpenseDto ) {
+  public async update(expense: ExpenseEntity, expenseDto: CreateExpenseDto) {
     return this.expenseRepo.save(
-      this.expenseRepo.merge(expense, { ...expenseDto })
-    )
+      this.expenseRepo.merge(expense, { ...expenseDto }),
+    );
   }
 
   public async delete(id: number) {
-    return this.expenseRepo.delete(id)
+    return this.expenseRepo.delete(id);
   }
 }

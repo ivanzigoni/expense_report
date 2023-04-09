@@ -7,7 +7,15 @@ import { MailerModule } from './modules/mailer/mailer.module';
 import { QueueManagerModule } from './modules/queue-manager/queue-manager.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, ExpenseManager, DatabaseModule, ConfigModule, MailerModule, QueueManagerModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    ExpenseManager,
+    DatabaseModule,
+    ConfigModule,
+    MailerModule,
+    QueueManagerModule,
+  ],
   controllers: [],
   providers: [],
 })

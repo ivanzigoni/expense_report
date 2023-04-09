@@ -6,14 +6,18 @@ As migrations devem ser rodadas de forma manual, inclusive ao subir o container 
 
 O token retornado para o login é um Bearer JWT.
 
+---
 Diagrama ER.
 
 ![db diagram](./assets/diagram.png)
 
-
-
-
+---
 Documentação da API através do Swagger disponível na rota /api (HTML).
 
 ![swagger document](./assets/swagger.png)
 
+---
+Cobertura de testes.
+![test coverage](./assets/coverage.png)
+
+---

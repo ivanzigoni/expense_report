@@ -12,7 +12,7 @@ import { Request } from 'express';
 export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -25,16 +25,13 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(
-        token,
-        { secret: this.configService.get("JWT_SECRET") }
-      );
+      const payload = await this.jwtService.verifyAsync(token, {
+        secret: this.configService.get('JWT_SECRET'),
+      });
 
       request['user'] = payload;
     } catch {
-
       throw new UnauthorizedException();
-
     }
 
     return true;

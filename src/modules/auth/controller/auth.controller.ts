@@ -1,27 +1,35 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Post,
+  UseInterceptors,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { TokenPayload } from '../../../common/tokenPayload.interface';
 import { UserEntity } from '../../../modules/database/user/user.entity';
-import { UserService } from '../../database/user/service/user.service'
+import { UserService } from '../../database/user/service/user.service';
 import { CreateUserDto } from '../../database/user/user.dto';
 import { LoginCredentialsDto } from '../loginCredentialsDto';
 import { AuthService } from '../service/auth.service';
 
-@ApiTags("Auth")
+@ApiTags('Auth')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly userService: UserService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {}
 
   @ApiOkResponse({
     type: UserEntity,
   })
-  @Post("/signup")
+  @Post('/signup')
   createUser(
-    @Body(new ValidationPipe()) userDto: CreateUserDto
+    @Body(new ValidationPipe()) userDto: CreateUserDto,
   ): Promise<UserEntity> {
     return this.userService.create(userDto);
   }
@@ -29,19 +37,18 @@ export class AuthController {
   @ApiOkResponse({
     type: TokenPayload,
   })
-  @Post("/login")
+  @Post('/login')
   login(
-    @Body(new ValidationPipe()) loginCredentials: LoginCredentialsDto
+    @Body(new ValidationPipe()) loginCredentials: LoginCredentialsDto,
   ): Promise<TokenPayload> {
-    return this.authService.signIn(loginCredentials)
+    return this.authService.signIn(loginCredentials);
   }
 
   @ApiProperty({
-    type: String
+    type: String,
   })
-  @Get("/healthcheck")
+  @Get('/healthcheck')
   teste() {
-    return "ok"
+    return 'ok';
   }
-
 }

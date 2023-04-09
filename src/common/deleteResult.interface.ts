@@ -1,5 +1,5 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { DeleteResult } from "typeorm";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { DeleteResult } from 'typeorm';
 
 export class DeleteRes implements DeleteResult {
   @ApiProperty()
