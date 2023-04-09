@@ -9,13 +9,14 @@ export class UserService {
   ) {}
 
   public async create(userDto: CreateUserDto) {
-    const user = await this.userRepo.findOneByEmail(userDto.email);
 
-    if (user) {
-      throw new ForbiddenException("email already in use");
-    } else {
+    try {
+      await this.userRepo.findOneByEmail(userDto.email);
+    } catch (err) {
       return this.userRepo.create(userDto)
     }
+
+    throw new ForbiddenException("email already in use");
 
   }
 
