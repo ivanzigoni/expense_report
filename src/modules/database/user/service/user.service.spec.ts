@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserRepository } from '../repository/user.repository';
 import { UserService } from './user.service';
-import { user1 } from '../../expense/repository/test-assets/mock';
+import { user1, user2 } from '../../expense/repository/test-assets/mock';
 import { ForbiddenException } from '@nestjs/common';
 
 describe('UserService', () => {
@@ -58,5 +58,29 @@ describe('UserService', () => {
       expect(err).toBeInstanceOf(ForbiddenException);
     }
 
+  });
+
+  it('get all should return list of users', async () => {
+    userRepository.findAll = jest.fn().mockImplementation(() => [user1, user2])
+
+    const users = await userService.getAll();
+
+    expect(users).toEqual([user1, user2])
+  });
+
+  it('getOneById should return user by id', async () => {
+    userRepository.findOneById = jest.fn().mockImplementation(() => user1)
+
+    const user = await userService.getOneById(1);
+
+    expect(user.id).toBe(1);
+  });
+
+  it('getOneByEmail should return user by email', async () => {
+    userRepository.findOneByEmail = jest.fn().mockImplementation(() => user1)
+
+    const user = await userService.getOneByEmail(user1.email);
+
+    expect(user.email).toBe(user1.email);
   });
 });

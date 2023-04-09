@@ -30,7 +30,7 @@ export class UserService {
     return this.userRepo.findAll();
   }
 
-  public async getOneById(id: number, relations: string[]) {
+  public async getOneById(id: number, relations: string[] = []) {
     return this.userRepo.findOneById(id, relations);
   }
 
