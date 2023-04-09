@@ -8,7 +8,8 @@ import { QueueManagerModule } from '../queue-manager/queue-manager.module';
 import { BullModule } from '@nestjs/bull';
 
 @Module({
-  imports: [AuthModule, ExpenseModule, UserModule,     BullModule.registerQueue({
+  imports: [AuthModule, ExpenseModule, UserModule,
+    BullModule.registerQueue({
     name: "mailqueue"
   })],
   providers: [ExpenseManagerService],

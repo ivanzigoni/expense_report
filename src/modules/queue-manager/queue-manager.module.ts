@@ -17,8 +17,8 @@ import { MailQueueConsumer } from './mailQueue.consumer';
         },
       }), inject: [ConfigService]
     }),
-    BullModule.registerQueueAsync({
-      useFactory: () => ({ name: "mailqueue" })
+    BullModule.registerQueue({
+      name: "mailqueue"
     })
   , ExpenseModule],
 })
