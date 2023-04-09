@@ -17,6 +17,7 @@ Documentação da API através do Swagger disponível na rota /api (HTML).
 ![swagger document](./assets/swagger.png)
 
 ---
+
 Cobertura de testes.
 ![test coverage](./assets/coverage.png)
 
