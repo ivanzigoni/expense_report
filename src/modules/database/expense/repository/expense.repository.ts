@@ -17,10 +17,7 @@ export class ExpenseRepository {
   }
 
   public async findOneById(id: number, relations: string[] = []) {
-    console.log(relations, "relations")
-    const teste = await this.expenseRepo.findOne({ where: { id }, relations })
-    console.log(teste);
-    return teste
+    return this.expenseRepo.findOne({ where: { id }, relations })
   }
 
   public async create(expenseDto: CreateExpenseDto, user: UserEntity) {

@@ -14,7 +14,7 @@ export class ExpenseManagerController {
   constructor(
     private readonly expenseManagerService: ExpenseManagerService,
     private readonly userService: UserService,
-    private readonly expenseService: ExpenseService
+    private readonly expenseService: ExpenseService,
   ) {}
 
   @Post("create")
