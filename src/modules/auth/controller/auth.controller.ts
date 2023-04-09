@@ -1,10 +1,9 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors, ValidationPipe } from '@nestjs/common';
 import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
-import { TokenPayload } from 'src/common/tokenPayload.interface';
-import { UserEntity } from 'src/modules/database/user/user.entity';
+import { TokenPayload } from '../../../common/tokenPayload.interface';
+import { UserEntity } from '../../../modules/database/user/user.entity';
 import { UserService } from '../../database/user/service/user.service'
 import { CreateUserDto } from '../../database/user/user.dto';
-import { AuthGuard } from '../auth.guard';
 import { LoginCredentialsDto } from '../loginCredentialsDto';
 import { AuthService } from '../service/auth.service';
 
